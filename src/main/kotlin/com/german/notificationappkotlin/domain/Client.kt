@@ -6,6 +6,6 @@ import javax.persistence.Embeddable
 @Embeddable
 data class Client(
     val name: String,
-    val favoriteMedias: Medias,
-    val favoriteMediaIdentifier: Medias
+    val favoriteMedia: Medias,
+    val favoriteMediaIdentifier: String
 )

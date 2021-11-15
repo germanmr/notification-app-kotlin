@@ -9,8 +9,7 @@ import javax.persistence.*
 //object class MessageRequest(
 data class MessageRequest(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long,
-    val title: String,
-    val uuid: UUID,
+    val uuid: UUID = UUID.randomUUID(),
     @Embedded
     val client: Client,
     @Embedded
@@ -18,7 +17,7 @@ data class MessageRequest(
     var error: String? = null,
     @Enumerated(EnumType.STRING)
     @Column(name = "message_state")
-    var messageState: MessageStates
+    var messageState: MessageStates = MessageStates.PENDING
 ) {
 
     // TODO use an entity to with Embeddable StateWithMessage?

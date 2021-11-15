@@ -75,6 +75,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+//    implementation("org.slf4j:slf4j-api:1.7.32")
+//    implementation("org.slf4j:slf4j-log4j12:1.7.29")
+//
+//    testImplementation("org.slf4j:slf4j-jdk14:1.8.0-alpha0")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
