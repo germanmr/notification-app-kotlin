@@ -1,6 +1,7 @@
 package com.german.notificationappkotlin.service
 
 import com.german.notificationappkotlin.repositories.MessageRequestRepository
+import com.german.notificationappkotlin.service.publisher.KotlinProducer
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.logging.Logger
@@ -15,6 +16,9 @@ class AbstractDispatcherServiceImpl : DispatcherService {
 
     @Autowired
     lateinit var messageRequestRepository: MessageRequestRepository
+
+    @Autowired
+    lateinit var kotlinProducer: KotlinProducer
 
     @Transactional
     override fun dispatch(batchSize: Long) {

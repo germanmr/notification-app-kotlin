@@ -4,5 +4,6 @@ enum class MessageStates {
     PENDING,
     PROCESSING,
     ERROR,
+    CANCELLED,
     SUCCESS;
 }

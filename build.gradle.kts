@@ -76,20 +76,19 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-//    implementation("org.slf4j:slf4j-api:1.7.32")
-//    implementation("org.slf4j:slf4j-log4j12:1.7.29")
-//
-//    testImplementation("org.slf4j:slf4j-jdk14:1.8.0-alpha0")
+    implementation("org.springframework.kafka:spring-kafka")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
+    testImplementation("io.mockk:mockk:1.12.0")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
     implementation("org.jetbrains.exposed:exposed-core:0.24.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.24.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.24.1")
+//    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
