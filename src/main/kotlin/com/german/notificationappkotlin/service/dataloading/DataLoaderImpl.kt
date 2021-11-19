@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service
 @Service
 class DataLoaderImpl : DataLoader {
 
+    // Use this logger!!
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         @JvmStatic

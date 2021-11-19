@@ -2,15 +2,18 @@ package com.german.notificationappkotlin.repositories
 
 import com.german.notificationappkotlin.domain.MessageRequest
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.data.jpa.repository.Lock
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.LockModeType
+import javax.transaction.Transactional
 
 @Repository
-interface MessageRequestRepository : JpaRepository<MessageRequest, Long> {
+@Transactional
+interface MessageRequestRepository : JpaRepository<MessageRequest, Long>, JpaSpecificationExecutor<MessageRequest> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     override fun findById(id: Long): Optional<MessageRequest>

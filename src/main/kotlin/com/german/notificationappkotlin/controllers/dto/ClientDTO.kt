@@ -1,4 +1,4 @@
-package com.german.notificationappkotlin.service.validating
+package com.german.notificationappkotlin.controllers.dto
 
 import com.german.notificationappkotlin.domain.Medias
 

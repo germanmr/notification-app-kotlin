@@ -4,7 +4,6 @@ import com.german.notificationappkotlin.service.DispatcherService
 import com.german.notificationappkotlin.service.MessageRequestService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -25,27 +24,31 @@ class MessagesRequestController {
     }
 
     @DeleteMapping("/{id}")
-    fun deleteRequestMessage(@PathVariable("id") messageRequestId: Long): ResponseEntity<String> {
-
-        return try {
-            messageRequestService.deleteMessageRequest(messageRequestId)
-
-            ResponseEntity.status(HttpStatus.OK).build()
-        } catch (e: Exception) {
-            ResponseEntity.notFound().build()
-        }
+    fun deleteRequestMessage(@PathVariable("id") messageRequestId: Long) {
+        messageRequestService.deleteMessageRequest(messageRequestId)
     }
 
     @PutMapping("/cancel/{id}")
     fun cancelMessageRequest(@PathVariable("id") messageRequestId: Long): ResponseEntity<Any> {
-        val cancelMessageRequest = messageRequestService.cancelMessageRequest(messageRequestId)
+        //
+        val cancelledMessageRequest = messageRequestService.cancelMessageRequest(messageRequestId)
 
         // If we want 404 when not found we must use an if
-        // We use this
-        return if (cancelMessageRequest == null)
-            ResponseEntity.notFound().build()
+        // We use null implicit null checking
+        /**
+         * WARNING: The run block will be evaluated either if b is null, or if the let-block evaluates to null.
+         */
+//        return cancelledMessageRequest?.let { // let: With the cancelled request I build a different object!
+//            ResponseEntity.ok(cancelledMessageRequest)
+//            // warning, if we "return null" from here this will enter the "run" block
+//        } ?: run { // run: Just run a block of code
+//            ResponseEntity("The message Request was not found with id: $messageRequestId", HttpStatus.NOT_FOUND)
+//        }
+
+        return if (cancelledMessageRequest != null)
+            ResponseEntity.ok(cancelledMessageRequest)
         else
-            ResponseEntity.ok(cancelMessageRequest)
+            ResponseEntity.notFound().build()
     }
 
     @GetMapping("/ping")

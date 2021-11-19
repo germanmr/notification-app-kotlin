@@ -1,5 +1,7 @@
-package com.german.notificationappkotlin.exceptions
+package com.german.notificationappkotlin.controllers.response
 
-class RequestErrorResponse(value: Int, message: String?, currentTimeMillis: Long) : MultiValueMap<String, String> {
-
-}
+open class RequestErrorResponse(
+    var status: Int? = null,
+    var message: String,
+    var timeStamp: Long
+)

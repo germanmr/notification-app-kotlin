@@ -1,7 +1,4 @@
 package com.german.notificationappkotlin.controllers.response
 
-class MessageRequestResponse(
-    var status: Int? = null,
-    var message: String? = null,
-    var timeStamp: Long? = null
-)
+class MessageRequestErrorResponse(value: Int, message: String = "", currentTimeMillis: Long) :
+    RequestErrorResponse(value, message, currentTimeMillis)
