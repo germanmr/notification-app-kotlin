@@ -1,8 +1,8 @@
 package com.german.notificationappkotlin.controllers
 
 import com.german.notificationappkotlin.controllers.dto.ComplexClientDTO
-import com.german.notificationappkotlin.domain.Client
-import com.german.notificationappkotlin.domain.ComplexClient
+import com.german.notificationappkotlin.controllers.dto.map.toDTO
+import com.german.notificationappkotlin.controllers.dto.map.toEntity
 import com.german.notificationappkotlin.exceptions.ClientNotFoundException
 import com.german.notificationappkotlin.external.RestTemplateService
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,12 +34,4 @@ class ClientController {
         println("Returning : $complexClientDTO")
         return complexClientDTO
     }
-}
-
-fun ComplexClientDTO.toEntity(): ComplexClient {
-    return ComplexClient(description, Client(name, favoriteMedia, favoriteMediaIdentifier))
-}
-
-fun ComplexClient.toDTO(): ComplexClientDTO {
-    return ComplexClientDTO(description, client.name, client.favoriteMedia, client.favoriteMediaIdentifier)
 }
