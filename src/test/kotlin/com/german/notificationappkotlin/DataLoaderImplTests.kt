@@ -6,10 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class DataLoaderImplTests {
 
-
-
-	@Test
-	fun test() {
-	}
-
+    @Test
+    fun test() {
+    }
 }

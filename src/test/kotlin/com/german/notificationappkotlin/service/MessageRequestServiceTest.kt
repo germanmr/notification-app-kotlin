@@ -15,25 +15,20 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.ArgumentMatchers
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.Rollback
+import org.springframework.test.context.ActiveProfiles
 import java.util.*
 
 @SpringBootTest
 @Rollback
 @ExtendWith(MockKExtension::class)
+@ActiveProfiles("test")
 class MessageRequestServiceTest {
 
     @MockK
     lateinit var messageRequestRepository: MessageRequestRepository
 
-    //    @Autowired
     @InjectMockKs
     lateinit var messageRequestService: MessageRequestService
-
-//    @BeforeEach
-//    fun setUp() {
-//
-//        MockKAnnotations.init(this)
-//    }
 
     @Test
     fun successfullySaveData_withOne_Test() {
