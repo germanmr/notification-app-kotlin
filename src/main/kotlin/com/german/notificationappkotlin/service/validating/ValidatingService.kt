@@ -13,7 +13,6 @@ class ValidatingService {
 
     fun isClientValid(client: ClientDTO): Boolean {
         return if (client is ComplexClientDTO) {
-            // call external service to validate
             externalValidationClient.requestValidation(client.description)
         } else
             true
