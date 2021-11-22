@@ -25,11 +25,11 @@ class RestTemplateService {
     @Autowired
     lateinit var restTemplate: RestTemplate
 
-    fun getComplexClient(): ResponseEntity<ComplexClientDTO> = try {
+    fun getComplexClient(clientID: Long): ResponseEntity<ComplexClientDTO> = try {
         restTemplate.getForEntity(
             UriComponentsBuilder
                 .fromHttpUrl(notificationAppConfiguration.url)
-                .path("/client/123")
+                .path("/client/$clientID")
                 .build()
                 .toUri(),
             ComplexClientDTO::class.java

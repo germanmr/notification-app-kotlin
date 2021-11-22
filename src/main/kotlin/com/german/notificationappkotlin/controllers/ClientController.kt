@@ -21,7 +21,7 @@ class ClientController {
     @GetMapping("/external/{clientID}")
     fun getClientFromExternalSource(@PathVariable("clientID") clientID: Long): ComplexClientDTO {
         // First we have to find the client
-        val obtainedComplexClientDTO = restTemplateService.getComplexClient().let { it.body }
+        val obtainedComplexClientDTO = restTemplateService.getComplexClient(clientID).let { it.body }
 
         obtainedComplexClientDTO ?: throw ClientNotFoundException()
 
