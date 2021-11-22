@@ -25,7 +25,7 @@ class RestTemplateService {
     @Autowired
     lateinit var restTemplate: RestTemplate
 
-    fun getComplexClient(clientID: Long): ResponseEntity<ComplexClientDTO> = try {
+    fun getComplexClient(clientID: Long): ResponseEntity<*> = try {
         restTemplate.getForEntity(
             UriComponentsBuilder
                 .fromHttpUrl(notificationAppConfiguration.url)
@@ -35,94 +35,7 @@ class RestTemplateService {
             ComplexClientDTO::class.java
         )
     } catch (e: RestClientResponseException) {
-        ResponseEntity.status(e.rawStatusCode).build()
+        logger.error("There was an error while consuming the service. Error: $e")
+        ResponseEntity.status(e.rawStatusCode).build<Int>()
     }
-
-//    fun getForObject(): Tattoo? = try {
-//        restTemplate.getForObject(
-//            UriComponentsBuilder
-//                .fromHttpUrl(tattooServiceConfiguration.url)
-//                .path("/tattoo/123")
-//                .build()
-//                .toUri(),
-//            Tattoo::class.java
-//        )
-//    } catch (e: RestClientResponseException) {
-//        null
-//    }
-//
-//    fun postForEntity(): ResponseEntity<TattooPostResult> = try {
-//        restTemplate.postForEntity(
-//            UriComponentsBuilder
-//                .fromHttpUrl(tattooServiceConfiguration.url)
-//                .path("/tattoo/123")
-//                .build()
-//                .toUri(),
-//            Tattoo(123, "A new beautiful tattoo", Dimensions(100, 40), TattooStyles.NewSchool),
-//            TattooPostResult::class.java
-//        )
-//    } catch (e: RestClientResponseException) {
-//        ResponseEntity.status(e.rawStatusCode).build()
-//    }
-//
-//    fun postForObject(): TattooPostResult? = try {
-//        restTemplate.postForObject(
-//            UriComponentsBuilder
-//                .fromHttpUrl(tattooServiceConfiguration.url)
-//                .path("/tattoo/123")
-//                .build()
-//                .toUri(),
-//            Tattoo(123, "A new beautiful tattoo", Dimensions(100, 40), TattooStyles.NewSchool),
-//            TattooPostResult::class.java
-//        )
-//    } catch (e: RestClientResponseException) {
-//        null
-//    }
-//
-//    fun put(): String = try {
-//        val tattoo = Tattoo(123, "A new beautiful tattoo", Dimensions(100, 40), TattooStyles.NewSchool)
-//        restTemplate.put(
-//            UriComponentsBuilder
-//                .fromHttpUrl(tattooServiceConfiguration.url)
-//                .path("/tattoo/123")
-//                .build()
-//                .toUri(),
-//            tattoo,
-//        )
-//        "Tattoo resource created $tattoo"
-//    } catch (e: RestClientResponseException) {
-//        val error = "Put client error ${e.rawStatusCode}"
-//        logger.error(error)
-//        error
-//    }
-//
-//    fun delete(): String = try {
-//        restTemplate.delete(
-//            UriComponentsBuilder
-//                .fromHttpUrl(tattooServiceConfiguration.url)
-//                .path("/tattoo/123")
-//                .build()
-//                .toUri()
-//        )
-//        "Tattoo resource deleted"
-//    } catch (e: RestClientResponseException) {
-//        val error = "Put client error ${e.rawStatusCode}"
-//        logger.error(error)
-//        error
-//    }
-//
-//    fun exchange(): ResponseEntity<TattooPostResult> = try {
-//        restTemplate.exchange(
-//            UriComponentsBuilder
-//                .fromHttpUrl(tattooServiceConfiguration.url)
-//                .path("/tattoo/123")
-//                .build()
-//                .toUri(),
-//            HttpMethod.POST,
-//            HttpEntity<Tattoo>(Tattoo(123, "A new beautiful tattoo", Dimensions(100, 40), TattooStyles.NewSchool)),
-//            TattooPostResult::class.java
-//        )
-//    } catch (e: RestClientResponseException) {
-//        ResponseEntity.status(e.rawStatusCode).build()
-//    }
 }

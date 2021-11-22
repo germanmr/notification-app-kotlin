@@ -2,6 +2,7 @@ package com.german.notificationappkotlin.exceptions.handler
 
 import com.german.notificationappkotlin.controllers.response.MessageRequestErrorResponse
 import com.german.notificationappkotlin.controllers.response.RequestErrorResponse
+import com.german.notificationappkotlin.exceptions.ClientNotFoundException
 import com.german.notificationappkotlin.exceptions.MessageRequestNotFoundException
 import com.german.notificationappkotlin.log.Utils
 import org.springframework.http.HttpStatus
@@ -26,7 +27,17 @@ class GenericExceptionHandler {
             exception.message.orEmpty(),
             System.currentTimeMillis()
         )
+        return ResponseEntity(messageRequestErrorResponse, HttpStatus.NOT_FOUND)
+    }
 
+    @ExceptionHandler
+    fun handleException(exception: ClientNotFoundException): ResponseEntity<MessageRequestErrorResponse> {
+        logger.error("Error: $exception")
+        val messageRequestErrorResponse = MessageRequestErrorResponse(
+            HttpStatus.NOT_FOUND.value(),
+            exception.message.orEmpty(),
+            System.currentTimeMillis()
+        )
         return ResponseEntity(messageRequestErrorResponse, HttpStatus.NOT_FOUND)
     }
 
@@ -38,7 +49,6 @@ class GenericExceptionHandler {
             exception.message.orEmpty(),
             System.currentTimeMillis()
         )
-
         return ResponseEntity(requestErrorResponse, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }
