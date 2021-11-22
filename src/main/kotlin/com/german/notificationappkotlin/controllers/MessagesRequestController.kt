@@ -4,6 +4,7 @@ import com.german.notificationappkotlin.service.DispatcherService
 import com.german.notificationappkotlin.service.MessageRequestService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -17,6 +18,9 @@ class MessagesRequestController {
 
     @Autowired
     lateinit var messageRequestService: MessageRequestService
+
+    @Value("\${version.number}")
+    lateinit var version: String
 
     @PutMapping("/dispatch")
     fun dispatch() {
@@ -54,5 +58,10 @@ class MessagesRequestController {
     @GetMapping("/ping")
     fun ping(): String {
         return "hello"
+    }
+
+    @GetMapping("/version")
+    fun version(): String {
+        return version
     }
 }
