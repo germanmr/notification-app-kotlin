@@ -10,7 +10,8 @@ import javax.persistence.*
 data class MessageRequest(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long,
     val uuid: UUID = UUID.randomUUID(),
-    @Embedded
+    @OneToOne(cascade = [CascadeType.ALL])
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     val client: Client,
     @Embedded
     val publication: Publication,
@@ -36,6 +37,12 @@ data class MessageRequest(
         error = null
     }
 
+    fun setRequestPending() {
+        messageState = MessageStates.PENDING
+        error = null
+    }
+
+// TODO
 //    fun setRequestAcknowledgement(messageRequestDTO: MessageRequestDTO) {
 //        if (MessageStates.SUCCESS.equals(MessageStates.valueOf(messageRequestDTO.getMessageState().toString()))) {
 //            setSuccess()

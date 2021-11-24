@@ -38,5 +38,4 @@ interface MessageRequestRepository : JpaRepository<MessageRequest, Long>, JpaSpe
     )
 //    @QueryHints({ @QueryHint(name = "javax.persistence.lock.timeout", value = "5000") })
     fun getNextMessageForUpdate(): MessageRequest
-
 }

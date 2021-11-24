@@ -5,6 +5,7 @@ import com.german.notificationappkotlin.domain.MessageRequest
 import com.german.notificationappkotlin.domain.MessageStates
 import com.german.notificationappkotlin.domain.Publication
 import com.german.notificationappkotlin.exceptions.MessageRequestNotFoundException
+import com.german.notificationappkotlin.repositories.ClientRepository
 import com.german.notificationappkotlin.repositories.MessageRequestRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,14 +20,20 @@ class MessageRequestService {
     private val logger = LoggerFactory.getLogger(MessageRequestService::class.java)
 
     @Autowired
+    lateinit var clientRepository: ClientRepository
+
+    @Autowired
     lateinit var messageRequestRepository: MessageRequestRepository
 
     @Transactional
     fun saveData(clients: List<Client>, publication: Publication) {
         logger.info("Start - Saving Data")
         clients.forEach {
-            logger.info("Creating message request with client: $it")
-            val messageRequest = MessageRequest(id = 0, client = it, publication = publication)
+            logger.info("Saving client: $it")
+            val client = clientRepository.save(it)
+
+            logger.info("Creating message request with saved client: $client")
+            val messageRequest = MessageRequest(id = 0, client = client, publication = publication)
             logger.info("Message request created: $messageRequest")
             messageRequestRepository.save(messageRequest)
         }
@@ -71,7 +78,6 @@ class MessageRequestService {
             }
         return foundMessageRequest
     }
-
 
 
 //    fun deleteMessageRequest(messageRequestId: Long) {

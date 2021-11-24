@@ -17,8 +17,8 @@ class SchedulerService {
     @Scheduled(fixedDelay = 5000)
     fun validateClient() {
         val clients = listOf(
-            SimpleClientDTO("German", Medias.MAIL, "german@email.com"),
-            ComplexClientDTO("This is a text describing the client complexity", "Pete", Medias.SMS, "036659845")
+            SimpleClientDTO(1, "German", Medias.MAIL, "german@email.com"),
+            ComplexClientDTO("This is a text describing the client complexity", 2, "Pete", Medias.SMS, "036659845")
         ).forEach {
             // TODO if client not valid send email notifying this
             println("Is client valid: ${validatingService.isClientValid(it)}")
