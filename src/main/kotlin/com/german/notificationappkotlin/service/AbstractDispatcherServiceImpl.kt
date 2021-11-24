@@ -28,6 +28,8 @@ class AbstractDispatcherServiceImpl : DispatcherService {
     @Autowired
     lateinit var kotlinProducer: KotlinProducer
 
+
+    // TODO Add exception handling!!
     @Transactional
     override fun dispatch(batchSize: Long) {
         logger.info("Starting dispatch")

@@ -2,7 +2,6 @@ package com.german.notificationappkotlin.domain
 
 import javax.persistence.*
 
-// TODO many to one - one to many!
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 open class Client(

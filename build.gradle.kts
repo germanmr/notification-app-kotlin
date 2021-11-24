@@ -19,7 +19,12 @@ repositories {
     mavenCentral()
 }
 
-
+// We have to add this because of the issue:
+// "Getter methods of lazy classes cannot be final. Example: com.german.notificationappkotlin.domain.Client#getId"
+// This is for every attribute, actually not only the ID of the Client
+allOpen {
+    annotation("javax.persistence.Entity")
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
