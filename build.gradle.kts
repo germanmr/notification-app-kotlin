@@ -43,6 +43,12 @@ dependencies {
     testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("io.mockk:mockk:1.12.0")
 
+    // Was not able to configure swagger
+    // dependency complications and ui not working with certain spring boot versions
+    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
+    // Using spring Open API!!
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.12")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("org.postgresql:postgresql")
 
