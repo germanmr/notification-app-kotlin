@@ -1,14 +1,16 @@
 package com.german.notificationappkotlin.controllers.dto.map
 
-import com.german.notificationappkotlin.controllers.dto.ClientDTO
-import com.german.notificationappkotlin.controllers.dto.ComplexClientDTO
-import com.german.notificationappkotlin.controllers.dto.PublicationDTO
-import com.german.notificationappkotlin.controllers.dto.SimpleClientDTO
-import com.german.notificationappkotlin.domain.Client
-import com.german.notificationappkotlin.domain.ComplexClient
-import com.german.notificationappkotlin.domain.Publication
-import com.german.notificationappkotlin.domain.SimpleClient
+import com.german.notificationappkotlin.controllers.dto.*
+import com.german.notificationappkotlin.domain.*
 
+
+fun MessageRequest.toDTO(): MessageRequestDTO = MessageRequestDTO(
+    uuid = uuid,
+    client = client.toDTO(),
+    publication = publication.toDTO(),
+    error = error,
+    messageState = messageState.toString()
+)
 
 fun ComplexClientDTO.toEntity(): ComplexClient {
     return ComplexClient(description, id, name, favoriteMedia, favoriteMediaIdentifier)

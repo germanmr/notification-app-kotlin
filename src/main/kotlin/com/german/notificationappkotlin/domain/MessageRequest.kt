@@ -5,8 +5,6 @@ import javax.persistence.*
 
 
 @Entity
-//@Table(name = "message_request")
-//object class MessageRequest(
 data class MessageRequest(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long,
     val uuid: UUID = UUID.randomUUID(),

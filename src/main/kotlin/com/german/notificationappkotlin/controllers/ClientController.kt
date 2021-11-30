@@ -19,6 +19,7 @@ class ClientController {
     @Autowired
     lateinit var restTemplateService: RestTemplateService
 
+    // TODO move this into a service class
     @GetMapping("/external/{clientID}")
     fun getClientFromExternalSource(@PathVariable("clientID") clientID: Long): ResponseEntity<Any> {
         // First we have to find the client

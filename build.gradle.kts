@@ -5,8 +5,13 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.5.31"
     kotlin("plugin.spring") version "1.5.31"
+    // Used for mocking framework
+    // https://kotlinlang.org/docs/all-open-plugin.html
     id("org.jetbrains.kotlin.plugin.allopen") version "1.5.31"
+    // Use for hibernate framework
+    // https://kotlinlang.org/docs/no-arg-plugin.html
     id("org.jetbrains.kotlin.plugin.noarg") version "1.5.31"
+    // https://kotlinlang.org/docs/no-arg-plugin.html#jpa-support
     id("org.jetbrains.kotlin.plugin.jpa") version "1.5.31"
 }
 

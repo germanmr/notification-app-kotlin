@@ -32,43 +32,23 @@ class AbstractDispatcherServiceImpl : DispatcherService {
     // TODO Add exception handling!!
     @Transactional
     override fun dispatch(batchSize: Long) {
-        logger.info("Starting dispatch")
-
-//            Long actualBatchsize = batchSize > MAX_BATCH_SIZE ? MAX_BATCH_SIZE : batchSize;
-//            logger.info("Begin batch publish - batch size: {}", actualBatchsize);
-        val actualBatchSize = 10L
+        logger.info("Begin batch publish - batch size: $batchSize");
+        val actualBatchSize = 1L
         messageRequestRepository.getBatchForUpdateById(actualBatchSize)
             .forEach {
-//                try {
-//                logger.info("Begin Publish message: " + messageRequest.getId());
-                it.setRequestBeginProcessing()
-                messageRequestRepository.save(it)
-                logger.info("#### -> Dispatching message -> $it")
-                logger.info("Before Kafka exception")
-                // Create MessageRequestDTO?
-                val messageRequestDTO = it.toDTO()
-                val message = mapper.writeValueAsString(messageRequestDTO)
-                kotlinProducer.send(message)
-                logger.info("End Publish message: ${it.id}")
-//            } catch (Exception e) {
-//                // If we got an exception the ones that have been sent are still committed and marked as PROCESSED
-//                // The error one should be back to its state
-//                messageRequest.setBeginProcessing();
-//                // Si tenemos un error aqui el mensaje ya fue
-//                // enviado pero volvemos la transaccion para atras?
-//                messageRequestRepository.save(messageRequest);
-//                logger.error(String.format("#### -> There was an error sending the message -> %s", e.getMessage()));
-//            }
-//            }
-//        logger.info("End of batch publish - batch size: " + actualBatchsize);
+                try {
+                    logger.info("Begin message publishing: ${it.id}");
+                    it.setRequestBeginProcessing()
+                    messageRequestRepository.save(it)
+
+                    logger.info("#### -> Dispatching message -> $it")
+                    val messageRequestDTO = it.toDTO()
+                    val message = mapper.writeValueAsString(messageRequestDTO)
+                    kotlinProducer.send(message)
+                    logger.info("End Publish message: ${it.id}")
+                } catch (e: Exception) {
+                    logger.error("#### -> There was an error sending the message -> ${e.message}")
+                }
             }
     }
 }
-
-fun MessageRequest.toDTO(): MessageRequestDTO = MessageRequestDTO(
-    uuid = uuid,
-    client = client.toDTO(),
-    publication = publication.toDTO(),
-    error = error,
-    messageState = messageState.toString()
-)

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest
+// We must use this for injecting dependencies, if not we get a "not initialize on lateinit vars"
 @ExtendWith(MockKExtension::class)
 @ActiveProfiles("test")
 class ClientControllerTest {
@@ -36,7 +37,9 @@ class ClientControllerTest {
         } answers {
             ComplexClientDTO(
                 "This is the description for the complex client",
-                "Mister important", Medias.MAIL,
+                0,
+                "Mister important",
+                Medias.MAIL,
                 "someemail@gmail.com"
             )
         }
@@ -52,6 +55,7 @@ class ClientControllerTest {
                     ResponseEntity.ok(
                         ComplexClientDTO(
                             "This is the description for the complex client",
+                            0,
                             "Mister important", Medias.MAIL,
                             "someemail@gmail.com"
                         )

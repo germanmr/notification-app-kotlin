@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile
 @Configuration
 @Profile("local")
 class LocalConfig {
-
+// TODO We can use this instead of taking the information from .properties files for example from a Secrets Server
 //    @Bean(name = ["datasource"])
 //    @Primary
 //    fun dataSource(): DataSource? {

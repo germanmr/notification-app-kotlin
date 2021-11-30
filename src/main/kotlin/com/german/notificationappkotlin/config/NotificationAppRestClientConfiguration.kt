@@ -8,7 +8,6 @@ import java.time.Duration
 
 @Configuration
 class NotificationAppRestClientConfiguration {
-
     @Bean
     fun restTemplate(): RestTemplate = RestTemplateBuilder()
         .setConnectTimeout(Duration.ofSeconds(10))

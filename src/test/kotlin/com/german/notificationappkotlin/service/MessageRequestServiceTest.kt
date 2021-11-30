@@ -36,7 +36,7 @@ class MessageRequestServiceTest {
         val uuid = UUID.randomUUID()
         val createdRequest = MessageRequest(
             id = 0, uuid = uuid,
-            client = Client("German", Medias.MAIL, "german@email.com"),
+            client = Client(0, "German", Medias.MAIL, "german@email.com"),
             publication = Publication("This is the message to send to German")
         )
         val slot = slot<MessageRequest>()
@@ -44,7 +44,7 @@ class MessageRequestServiceTest {
 
         // When
         messageRequestService.saveData(
-            arrayListOf(Client("German", Medias.MAIL, "german@email.com")),
+            arrayListOf(Client(0, "German", Medias.MAIL, "german@email.com")),
             Publication("This is the message to send to German")
         )
 
