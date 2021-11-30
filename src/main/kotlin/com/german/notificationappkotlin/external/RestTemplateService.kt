@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder
 @Service
 class RestTemplateService {
 
+    // Class properties
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         @JvmStatic
